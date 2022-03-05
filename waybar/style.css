@@ -1,0 +1,161 @@
+/*
+
+Color Pallete
+
+foreground:     '#abb2bf'
+background:     '#1e1e1e'
+alt-background: '#1e1e1e'
+alt-foreground: '#1f2227'
+
+black:   '#282c34'
+red:     '#e06c75'
+green:   '#98c379'
+yellow:  '#e5c07b'
+blue:    '#81A1C1'
+magenta: '#c678dd'
+cyan:    '#56b6c2'
+white:   '#c8ccd4'
+
+*/
+
+* {
+    border: 0px solid rgba(40, 44, 52, 0);
+    border-radius: 2px;
+    font-family: ProFontWindows Nerd Font Book, Font Awesome, sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    min-height: 0;
+    padding: 1px;
+}
+
+window#waybar {
+    background-color: #1E1E1E;
+    background: transparent;
+    color: #DDDDDD;
+    transition-property: background-color;
+    transition-duration: 0.5s;
+    border-radius: 0;
+}
+
+window > box {
+    margin-top: 20.5px;
+    margin-left: 20.5px;
+    margin-right: 20.5px;
+    background: #1e1e1e;
+    color: #DDDDDD;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+label:focus {
+    background-color: #474747;
+}
+
+@keyframes blink {
+    to {
+        background-color: #DDDDDD;
+        color: #1E1E1E;
+    }
+}
+
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#workspaces,
+#clock,
+#tray,
+#mode,
+#idle_inhibitor,
+#mpd {
+    padding: 0 10px;
+    margin: 4px 4px 4px 4px;
+    color: #666565;
+}
+
+#custom-launch {
+    margin-right: 20px;
+    margin-left: 16px;
+    font-size: 17px;
+    color: #81a1c1;
+}
+
+#workspaces button {
+    padding: 5px 5px;
+    background-color: transparent;
+    border-radius: 10px;
+    margin-left: 1px;
+    color: #c8ccd4;
+}
+
+#workspaces button:hover {
+    background-color: #c8ccd4;
+    color: #98c379;
+}
+
+#workspaces button.focused {
+    background-color: #e06c75;
+    color: #DDDDDD;
+}
+
+#workspaces button.urgent {
+    background-color: #98c379;
+}
+
+#custom-spotify {
+    font-size: 17px;
+    font-weight: 500;
+    color: #98c379;
+}
+
+#pulseaudio {
+    color: #DDDDDD;
+}
+
+#pulseaudio.muted {
+    background-color: #81a1c1;
+    color: #DDDDDD;
+}
+
+#backlight {
+    color: #DDDDDD;
+}
+
+#network {
+    color: #DDDDDD;
+}
+
+#battery {
+    color: #DDDDDD;
+}
+
+#battery.charging,
+#battery.plugged {
+    color: #DDDDDD;
+}
+
+#battery.critical:not(.charging) {
+    color: #DDDDDD;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#clock {
+    color: #DDDDDD;
+}
+
+#custom-off {
+    margin-right: 16px;
+    margin-left: 20px;
+    font-size: 17px;
+    color: #e06c75;
+}

@@ -1,0 +1,195 @@
+################################################################################
+###  VARIABLES
+################################################################################
+
+set $mod Mod4
+set $term urxvt
+set $file_man nautilus
+set $menu rofi -show drun
+set $browser brave-browser
+set $alt_browser microsoft-edge
+set $audio_man pavucontrol
+set $email_client thunderbird
+set $lock swaylock -F -i ~/.wall/wall1.jpg
+set $ide flatpak run com.visualstudio.code
+
+set $left h
+set $down j
+set $up k
+set $right l
+
+################################################################################
+###  STARTUP
+################################################################################
+
+workspace 2
+
+workspace 3
+
+workspace 4
+
+workspace 5
+
+workspace 6
+exec urxvt -e bpytop
+exec urxvt
+workspace 1
+
+################################################################################
+###  STYLING
+################################################################################
+
+default_border pixel 1
+client.focused          #81a1c1 #81a1c1 #81a1c1 #81a1c1 #81a1c1
+client.focused_inactive #282c34 #282c34 #282c34 #282c34 #282c34
+client.urgent           #e06c75 #e06c75 #e06c75 #e06c75 #e06c75
+client.unfocused        #282c34 #282c34 #282c34 #282c34 #282c34
+
+gaps inner 10
+gaps outer 10
+
+exec $HOME/.azotebg
+
+################################################################################
+###  KEYBINDINGS
+################################################################################
+    
+## Applications:
+
+    bindsym $mod+Return exec $term
+    bindsym $mod+e exec $file_man
+    bindsym $mod+r exec $menu
+    bindsym $mod+b exec $browser
+    bindsym $mod+Shift+b exec $alt_browser
+
+    bindsym $mod+Alt+a exec $audio_man
+    bindsym $mod+shift+n exec python ~/.config/sway/nm-rofi
+
+## Sway:
+
+    bindsym $mod+Shift+c kill
+    bindsym $mod+Shift+q exec swaymsg exit
+    bindsym $mod+shift+delete reload
+    bindsym $mod+alt+l exec $lock
+    floating_modifier $mod normal
+    bindsym $mod+space exec "$(cat ~/.config/sway/sway-shortcuts.conf | rofi -i -dmenu -p "shortcut overview")"
+
+## Window Navigation:
+
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+
+## Workspaces:
+
+    # Switch to workspace
+    bindsym $mod+1 workspace number 1
+    bindsym $mod+2 workspace number 2
+    bindsym $mod+3 workspace number 3
+    bindsym $mod+4 workspace number 4
+    bindsym $mod+5 workspace number 5
+    bindsym $mod+6 workspace number 6
+
+    # Move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+
+## Layout stuff:
+    bindsym $mod+n splith
+    bindsym $mod+m splitv
+    
+    # Switch layout style of current container
+    bindsym $mod+shift+d layout stacking
+    bindsym $mod+shift+s layout tabbed
+    bindsym $mod+shift+a layout toggle split
+
+    # bindsym $mod+space focus mode_toggle
+    bindsym $mod+shift+z fullscreen
+    bindsym $mod+shift+x floating toggle
+    bindsym $mod+a focus parent
+
+## Scratchpad:
+
+    bindsym $mod+Shift+minus move scratchpad
+    bindsym $mod+minus scratchpad show
+
+## Spotify:
+
+    bindsym $mod+s+p exec spotifycli --playpause
+    bindsym $mod+s+l exec spotifycli --next
+    bindsym $mod+s+h exec spotifycli --previous
+
+# Random Stuff:
+
+    bindsym $mod+p exec flameshot
+
+mode "resize" {
+    bindsym $left resize grow width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize shrink width 10px
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+shift+r mode "resize"
+
+################################################################################
+###  GET GTK WORKING IN SWAY
+################################################################################
+
+exec_always import-gsettings
+
+################################################################################
+###  STATUS BAR
+################################################################################
+
+bar {
+        swaybar_command waybar
+    }
+}
+
+include /etc/sway/config.d/*
+################################################################################
+###  OUTPUT CONFIGURATION
+################################################################################
+
+##output eDP-1 {
+##    resolution 1920x1080
+##    #position 960,1080
+##}
+
+set $laptop eDP-1
+bindswitch --locked lid:on output $laptop disable
+bindswitch --locked lid:off output $laptop enable
+
+################################################################################
+### INPUT CONFIGURATION
+################################################################################
+input * {
+    xkb_layout "dk"
+    xkb_variant "colemak,,typewriter"
+    xkb_options "grp:win_space_toggle"
+}
+
+input <identifier> xkb_model "pc101"
+
+input * {
+    tap enabled
+    natural_scroll enabled
+    dwt enabled
+    accel_profile "flat" # disable mouse acceleration (enabled by default; to set it manually, use "adaptive" instead of "flat")
+    pointer_accel 1.0 # set mouse sensitivity (between -1 and 1)
+}

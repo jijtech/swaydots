@@ -1,0 +1,102 @@
+{
+    "modules-left": ["custom/launch", "sway/workspaces","cpu","memory"],
+    "modules-center": ["clock"],
+    "modules-right": [
+        "custom/media",
+        "disk",
+        "temperature",
+        "pulseaudio",
+        "backlight",
+        "network",
+        "battery",
+        "custom/off"
+    ],
+    "custom/launch": {
+        "format": "コンピュータ",
+        "on-click": "rofi -show run"
+    },
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": " {icon} ",
+        "persistent_workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": [],
+            "6": []
+        },
+        "format-icons": {
+            "1": "Desk1 ",
+            "2": "Desk2 ",
+            "3": "Desk3 ",
+            "4": "Desk4 ",
+            "5": "🗁 ",
+            "6": ">_ ",
+            "urgent": " ",
+            "focused": " ",
+            "default": " "
+        }
+    },
+    "custom/media": {
+        "format": "{icon} {}",
+        "max-length": 10,
+        "format-icons": {
+            "spotify": "ᐅ",
+            "default": "ᐅ"
+        },
+        "on-click": "playerctl  play-pause",
+        "smooth-scrolling-threshold": 10,
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous",
+        "escape": true,
+        "exec": "$HOME/.config/waybar/custom_modules/mediaplayer.py 2> /dev/null"
+    },
+    "pulseaudio": {
+        "scroll-step": 1,
+        "format": "{icon} {volume}%", "format-bluetooth": "{volume}% {icon}🕪 {format_source}",
+        "format-bluetooth-muted": " 🕨  {icon} 🕨 muted",
+        "format-muted": " 🕨  muted",
+        "format-icons": {
+            "hands-free": "⎗",
+            "headset": "‣",
+            "phone": "℡",
+            "portable": "🕻",
+            "car": "╼",
+            "headphone": ["🙪 ", "🙫 ", " 🙩 "]
+        },
+        "on-click": "pavucontrol"
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "  {percent}%",
+        "on-scroll-up": "light -A 5",
+        "on-scroll-down": "light -U 5"
+    },
+    "network": {
+        "format-wifi": "直  {essid}",
+        "format-ethernet": "直  {ifname}: {ipaddr}/{cidr}",
+        "format-linked": "直  {ifname} (No IP)",
+        "format-disconnected": "X  Disconnected",
+        "format-alt": "直  {ifname}: {ipaddr}/{cidr}"
+    },
+    "battery": {
+        "interval": 60,
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}  {capacity}%",
+        "format-icons": [" ", " ", " ", " ", " "]
+    },
+    "clock": {
+        "interval": 1,
+        "format": "  {:%I:%M %p %b %d, %G}",
+        "format-alt": "  {:%I:%M %p}"
+    },
+    "custom/off": {
+        "format": " ",
+        "on-click": "swaymsg exit%b %d, %G"
+    }
+}
